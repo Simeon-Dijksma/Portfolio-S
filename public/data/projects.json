@@ -1,0 +1,308 @@
+[
+    {
+        "title": "Healthcare Website",
+        "name": "NerineZorg",
+        "desc": "Modern website for a Dutch ZZP outpatient care company with a lighthouse rating of 99-100. Made to be personal and clear.",
+        "link": "http://nerinezorg.nl",
+        "color": "#c65a8a",
+        "isPublic": true,
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript"
+        ],
+        "type": "website",
+        "img": "/images/Nerinezorg.webp"
+    },
+    {
+        "title": "Collection Platform",
+        "name": "Fridge Emblem Collection",
+        "desc": "Website showcasing the world's biggest fridge emblem collection with a modern and organized gallery layout.",
+        "link": "https://refrigeratoremblems.com/",
+        "color": "#a9cfe6",
+        "isPublic": true,
+        "tech": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "SQL"
+        ],
+        "type": "website",
+        "img": "/images/fridge.webp"
+    },
+    {
+        "title": "Tool",
+        "name": "Autonote Systems",
+        "desc": "The autonote tool and associated tools were made to track days weeks months and eventually years.",
+        "link": "/autonote",
+        "color": "#8033c9",
+        "isPublic": false,
+        "tech": [
+            "Bash"
+        ],
+        "srcLink": "https://github.com/LenaDijksma/Autonote",
+        "type": "Daytracking Tool",
+        "img": "/images/autonote.webp"
+    },
+    {
+        "title": "Tool",
+        "name": "NetScan",
+        "desc": "a small c program that scans your network for devices and open ports. it also displays hostname(if found) vendor and more.",
+        "link": "/netscan",
+        "color": "#43ae39",
+        "isPublic": false,
+        "tech": [
+            "C"
+        ],
+        "srcLink": "https://github.com/LenaDijksma/NetScan",
+        "type": "Networking Tool",
+        "img": "/images/netscan.webp",
+        "page": {
+            "tag": "Private / Non-Commercial Project",
+            "heroDesc": "",
+            "aboutTitle": "",
+            "aboutParagraphs": [
+                "NetScan is a command-line network scanner built from scratch in C. Given a subnet, or run with no arguments to auto-detect the local one, it ping-sweeps the range to find live hosts and tries to put a name to each one through DNS, mDNS, NetBIOS, and SSDP/UPnP lookups, falling back to a MAC vendor lookup when nothing else resolves. It can also deep-scan a single host directly with the --host flag.",
+                "Port scanning is done with a multi-threaded TCP connect-scan, with lightweight banner grabbing to help identify what's actually running on each open port. Scan range and connect timeout are both configurable from the command line, and results can be exported to JSON or CSV for use elsewhere.",
+                "A diff mode compares the current scan against the last one saved, flagging any devices that are new or have gone missing since. Output is columnar and color-coded in the terminal by default, with flags to hide the IP column or disable color entirely for cleaner piping into other tools. If optional dependencies like avahi, samba, or curl aren't installed, it detects that and prints what's missing along with the install command, rather than just failing name resolution silently.",
+                "I built it to get hands-on with raw sockets, threading, and Linux networking internals in C. There's still plenty I'd like to add, but it's a solid, working tool as it stands."
+            ],
+            "showcaseImg": "/images/netscan.webp",
+            "showcaseCaption": "Running **NetScan** on 192.168.178.0/24"
+        }
+    },
+    {
+        "title": "tool",
+        "name": "Localhost Port Scanner (portscan)",
+        "desc": "A C command-line tool that scans a given port range on localhost and identifies which process is listening on each port.",
+        "link": "/portscan",
+        "color": "#26a269",
+        "isPublic": false,
+        "tech": [
+            "C",
+            "Linux",
+            "/proc filesystem"
+        ],
+        "srcLink": "https://github.com/LenaDijksma/portscan",
+        "type": "Network Tool",
+        "img": "/images/1783600742210-portscan.webp",
+        "page": {
+            "tag": "Private/Non-commercial Project",
+            "heroDesc": "",
+            "aboutTitle": "",
+            "aboutParagraphs": [
+                "This project is a small, dependency-free CLI tool for a problem every developer runs into: figuring out what's actually bound to a given port on your own machine, without reaching for netstat or lsof. It's written in C and reads directly from the /proc filesystem, needing no root privileges and no external libraries.",
+                "The core approach works in three stages. First, it parses /proc/net/tcp and /proc/net/tcp6, the kernel-exposed tables of every TCP socket on the system, filtering down to sockets in the LISTEN state and recording their port number and socket inode. Second, it builds a full map from socket inode to owning PID by walking every process's /proc/<pid>/fd/ directory, since each open file descriptor is a symlink, and a socket descriptor's symlink target looks like socket:[12345], where 12345 is the inode.",
+                "Matching that against the listening sockets found in the first stage reveals which process owns which port. Third, for each resolved PID, it reads /proc/<pid>/comm and /proc/<pid>/cmdline to get a human-readable process name and full command line.",
+                "A notable bug during development was in the /proc/net/tcp parsing: the kernel's own header line lists 12 column names, but the actual data rows have fewer whitespace-separated tokens, since fields like tx_queue:rx_queue are colon-joined into a single token. This meant the inode field was being read one column too far to the right until the field-skip count was corrected.",
+                "The tool also supports a watch mode (-w), which takes an initial snapshot, then polls on an interval and diffs each new scan against the last one, printing only what changed: a port newly opened, a port that closed, or a port whose owning process changed, such as after a dev server restart. Building this exposed two further bugs: the result arrays were large enough per-entry (due to fixed-size name and command-line buffers)",
+                "that stack-allocating them at their maximum size overflowed the default stack and segfaulted, which was fixed by moving them to the heap; and stdout's default full-buffering meant watch mode's output appeared to vanish when the process was killed before its buffer flushed, fixed by switching stdout to line-buffered mode.",
+                "The finished tool resolves ports to real process names and command lines correctly both as an unprivileged user and under sudo, with root-owned system services like systemd-resolved only resolving when run with elevated privileges, exactly as expected given standard Linux file permissions."
+            ],
+            "showcaseImg": "/images/1783600742210-portscan.webp",
+            "showcaseCaption": ""
+        }
+    },
+    {
+        "title": "tool",
+        "name": "Raspberry Pi Wi-Fi to Ethernet Router",
+        "desc": "Configured a Raspberry Pi 3B as a Wi-Fi-to-Ethernet router using NetworkManager, dnsmasq, and nftables.",
+        "link": "/pi3b-router",
+        "color": "#e01b24",
+        "isPublic": false,
+        "tech": [
+            "Linux",
+            "Bash",
+            "Raspberry Pi",
+            "NetworkManager",
+            "dnsmasq",
+            "nftables",
+            "Tailscale"
+        ],
+        "type": "Networking Tool",
+        "img": "/images/1783579594030-pi3b.webp",
+        "page": {
+            "tag": "Private/Non-commercial Project",
+            "heroDesc": "",
+            "aboutTitle": "",
+            "aboutParagraphs": [
+                "This project turns a Raspberry Pi 3B into a functional router that bridges a Wi-Fi internet connection to a wired Ethernet network. Devices plugged into the Pi, directly or through a switch, receive DHCP-assigned IPs and route their traffic out through the Pi's Wi-Fi interface, with no dependency on the host network's own router.",
+                "The stack behind it: Raspberry Pi OS Lite (32-bit) as a minimal base with no desktop overhead, NetworkManager (nmcli) for interface configuration since it replaces the legacy dhcpcd approach used in older Pi OS releases, dnsmasq as the DHCP server for Ethernet-side clients, nftables for NAT and firewalling, sysctl for kernel-level IP forwarding, and Tailscale, which was already running on the Pi and had to be accounted for since it also manages its own nftables rules.",
+                "The network itself uses the Pi's Ethernet interface as a static gateway at 10.10.10.1/24, with dnsmasq handing out addresses in the 10.10.10.100 to 10.10.10.200 range and pointing clients at 1.1.1.1 and 8.8.8.8 for DNS. Traffic from eth0 is masqueraded out through wlan0.",
+                "Most of the actual troubleshooting came from working against a current Raspberry Pi OS install rather than older guides. IP forwarding wasn't where expected, since /etc/sysctl.conf was empty and current Pi OS instead expects drop-in files under /etc/sysctl.d/; this was fixed by adding net.ipv4.ip_forward=1 in a new 99-ipforward.conf and applying it with sysctl --system. There was no dhcpcd.service to restart, since Bookworm replaced dhcpcd with NetworkManager entirely, so all interface configuration went through nmcli connection modify instead. The static IP on eth0 was set the same way, through NetworkManager, and verified with ip addr.",
+                "dnsmasq initially failed to start with an \"unknown interface eth0\" error, because it was starting before the Ethernet interface was available and was bound too strictly; switching its configuration from bind-interfaces to bind-dynamic let it wait for the interface instead of failing outright. On the client side, a laptop didn't reconnect automatically after a cable was unplugged and replugged, since NetworkManager wasn't re-activating the profile on its own; this was fixed manually with nmcli connection up, and permanently by setting connection.autoconnect yes. That same laptop also didn't have dhclient available, which is expected on modern NetworkManager-based distros that don't ship the ISC DHCP client by default, so nmcli connection down and up were used instead.",
+                "Tailscale also logged warnings that its NAT table was managed separately through iptables-nft, which turned out to be harmless. The custom masquerade rule for wlan0 was confirmed still active alongside it.",
+                "Everything was verified with ip addr and ip route for interfaces and routing, /proc/sys/net/ipv4/ip_forward for forwarding status, systemctl status dnsmasq and nft list ruleset for the DHCP and NAT setup, and /var/lib/misc/dnsmasq.leases for issued leases. In the end, the laptop received an IP from the Pi, used it as its default gateway, and kept full internet access with its own Wi-Fi turned off, confirming the Pi was correctly routing all traffic."
+            ],
+            "showcaseImg": "/images/1783579594030-pi3b.webp",
+            "showcaseCaption": ""
+        }
+    },
+    {
+        "title": "Tool Website",
+        "name": "Moduloro",
+        "desc": "a simple website to host tools on, it loads js from '/tools' and loads them in the sidebar. when clicked render(container) is ran and your page will load.",
+        "link": "/moduloro",
+        "color": "#57e389",
+        "isPublic": false,
+        "tech": [
+            "HTML",
+            "CSS",
+            "JS"
+        ],
+        "srcLink": "https://github.com/LenaDijksma/Moduloro",
+        "type": "website",
+        "img": "/images/1784265645608-screenshot-2026-07-17-at-07-20-36-moduloro.png",
+        "page": {
+            "tag": "Private/Non-commercial Projects",
+            "heroDesc": "",
+            "aboutTitle": "",
+            "aboutParagraphs": [
+                "Moduloro started as a simple question: what's the minimum architecture needed to keep adding small tools to a site without the overhead growing with it?",
+                "The answer was a plugin-style system built on plain ES modules — no framework, no bundler, no build step.",
+                "Each tool is a single .js file that exports one function, render(container). An Express server scans the tools/ directory on startup, reads an optional name comment from the top of each file, and generates the sidebar manifest automatically — so adding a new feature is just \"create a file, restart the server.\" No routing config, no registration step, no rebuild.",
+                "The frontend loads tools on demand with dynamic import(), passing each one a fresh DOM container to own outright. That constraint — a tool gets a <div> and nothing else — kept every module self-contained and forced consistent patterns for state and re-rendering (each tool keeps its own state in closure and calls a local draw() function to re-render, rather than reaching for a framework's diffing).",
+                "The Kanban board was the most involved piece: drag-and-drop columns, inline search that had to survive re-renders without losing input focus, and a detail modal (title, due date, description, timestamp) built without any UI library — just DOM events, contenteditable/form inputs, and manual focus management.",
+                "Styling went through a deliberate refactor pass too: rather than scattering hex values and pixel numbers through the CSS, I pulled everything — color, spacing, radius, shadows, transitions — into CSS custom properties in :root, so the whole dark theme can be retuned from one place without touching component rules.",
+                "Everything persists client-side via localStorage; there's no backend database, keeping the whole thing a static-file-adjacent app with just enough server logic to make development friction-free."
+            ],
+            "showcaseImg": "/images/1784265645608-screenshot-2026-07-17-at-07-20-36-moduloro.png",
+            "showcaseCaption": "Moduloro clock module"
+        }
+    },
+    {
+        "title": "css framework",
+        "name": "ldcss",
+        "desc": "A custom css framework with css and js. techy style but with escape hatches for more fluid styles",
+        "link": "/ldcss",
+        "color": "#99c1f1",
+        "public": false,
+        "tech": [
+            "CSS",
+            "JS"
+        ],
+        "srcLink": "https://github.com/LenaDijksma/ldcss",
+        "type": "css framework",
+        "img": "/images/1784530855327-screenshot-2026-07-20-at-09-00-45-ldcss-lena-dijksma-css.png",
+        "page": {
+            "tag": "Private/Non-commercial Project",
+            "heroDesc": "",
+            "aboutTitle": "",
+            "aboutParagraphs": [
+                "**LDCSS** is a CSS framework with built-in JavaScript designed to provide a consistent, feature-rich foundation for building modern websites and web applications. It combines a large library of reusable components, utility classes, and custom HTML attributes to reduce boilerplate code while keeping projects organized and easy to maintain — all shipped as a single CSS file and a single JS file, with no build step required.",
+                "The framework extends standard HTML with its own naming conventions, using ld- classes for styling and data-ld- attributes for JavaScript-powered functionality. This split keeps a component's markup readable at a glance — structure and appearance live in classes, interactive state lives in attributes — so features like modals, tabs, comboboxes, or a command palette can be wired up directly in markup with minimal configuration, without hand-rolling the JavaScript behind them.",
+                "Out of the box, LDCSS now favors a clean, modern default: rounded corners, soft layered shadows, restrained borders, and a system sans-serif typeface, with a light/dark theme built in from the start. Every one of those defaults is just a CSS custom property, so the look is fully customizable — right down to a data-ld-shadow=\"hard\" escape hatch for teams who want the framework's earlier sharp-cornered, monospaced, terminal-inspired aesthetic back. Nothing about the visual language is hardcoded against being overridden.",
+                "The component library covers most of what a real interface needs: navigation (navbar collapse, breadcrumbs, scrollspy), overlays (modals, offcanvas panels, dropdowns, popovers, a command palette with ⌘K), forms (floating labels, validation states, comboboxes, tag inputs, dropzones, rating inputs, range sliders), data display (sortable and sticky-header tables, pagination, timelines, steppers, carousels), and feedback (toasts, skeletons, progress bars). Layout is handled by both an even-split grid and a full 12-column responsive grid, backed by a wide utility-class system — spacing, typography, flexbox, and breakpoint-aware variants down to order, display, and text alignment. Accessibility isn't an afterthought either: focus trapping and return, ARIA wiring, roving tabindex, reduced-motion and forced-colors support, and RTL-aware logical properties are built into the components themselves.",
+                "The project is under active, versioned development — currently at v2.3.0 — with a public changelog tracking every addition, fix, and (rare, clearly-flagged) breaking change. New releases keep the same priorities: reducing repetitive code, tightening consistency across projects, and making it possible to build a polished, accessible interface without reaching for several external libraries at once."
+            ],
+            "showcaseImg": "/images/1784530855327-screenshot-2026-07-20-at-09-00-45-ldcss-lena-dijksma-css.png",
+            "showcaseCaption": "demo page for ldcss"
+        }
+    },
+    {
+        "title": "utlity",
+        "name": "ld-graphs",
+        "desc": "A simple graph system for html that slots nicely into the pre-existing ldcss framework.",
+        "link": "/ldgraphs",
+        "color": "#813d9c",
+        "isPublic": false,
+        "tech": [
+            "HTML",
+            "CSS",
+            "JS"
+        ],
+        "type": "framework",
+        "img": "/images/1785235444971-screenshot-2026-07-28-at-12-42-27-ld-graph-demo.png",
+        "srcLink": "https://github.com/LenaDijksma/ld-graphs",
+        "page": {
+            "tag": "Private/Non-commercial Project",
+            "heroDesc": "",
+            "aboutTitle": "",
+            "aboutParagraphs": [
+                "ld-graph exists because most charting libraries are the wrong size for what a lot of pages actually need. You either reach for something like Chart.js or D3 and pull in a dependency, a build step, and an API surface built for dashboards — or you hand-roll SVG paths every time you want to show a trend line. ld-graph is meant to sit in the gap: small enough to vendor as two files, but structured enough that you're not fighting it once you need a second or third chart on a page.",
+                "The core idea is that a chart is just data plus a shape. You write ld-graph-data=\"1, 3, 5, 8\" and ld-graph-type=\"smooth\", and the library reads those two attributes off any element — it doesn't register a real custom element (<graph> isn't valid as one, since autonomous custom elements need a hyphen in the tag name), it just scans the DOM for anything carrying ld-graph-data and builds an SVG into it. That means you can use <graph>, a <div>, a <span>, whatever fits your markup, and it behaves identically. A MutationObserver watches for new elements and attribute changes, so charts stay in sync if you're injecting content dynamically, without you having to remember to call a re-init function every time — though window.ldGraph.refresh() is there if you want to trigger it manually.",
+                "Styling deliberately has almost no JS-side configuration. Colors, stroke width, bar radius, point size, spacing between a chart and its labels or legend — all of it routes through CSS custom properties. That's a conscious trade-off: it means you can reskin every graph on a page from one :root block, override a single instance with an inline style=\"\", and never have to touch ld-graph.js at all for anything visual. The one exception is per-series color for comparison charts, which cycles through --ld-graph-color-1 through --ld-graph-color-6 automatically, so a two- or three-series graph is colored sensibly out of the box without you specifying anything, but every slot is still just a variable you can override.",
+                "Comparison charts work by letting ld-graph-data take multiple series separated by semicolons. Line-family types (smooth, straight, step, dots) overlay the series on a shared scale; bars either group side-by-side or stack, depending on whether you set ld-graph-stack. All series in a graph share one min/max range unless you override it, which matters for comparison charts specifically — you want \"this week\" and \"last week\" plotted on axes that mean the same thing, not each auto-scaled to its own bounds. A ld-graph-legend attribute renders a simple swatch key using ld-graph-series-labels, and those same labels feed into a generated aria-label so screen readers get a real summary of what's being compared, not just \"image.\"",
+                "A few smaller decisions worth knowing about: internal layout uses a fixed 600×200 viewBox scaled by CSS, so charts stay crisp and responsive without recalculating coordinates on resize. The smooth line type uses a Catmull-Rom-to-Bezier conversion rather than a charting library's spline implementation, which keeps the file dependency-free but means very jagged data can produce slight overshoot in the curve — straight or step are the better choice if that matters for your data. Animated draw-ins respect prefers-reduced-motion automatically. And because everything renders as real SVG rather than canvas, individual bars, lines, and points are addressable and stylable with normal CSS selectors if you want to go further than the built-in variables.",
+                "It's built to sit next to ldcss without requiring it — same naming convention, same \"few dependency-free files you can vendor and forget\" philosophy, but nothing in ld-graph reaches into ldcss's token system or components. You can use one without the other."
+            ],
+            "showcaseImg": "/images/1785235444971-screenshot-2026-07-28-at-12-42-27-ld-graph-demo.png",
+            "showcaseCaption": ""
+        }
+    },
+    {
+        "title": "media-player",
+        "name": "LDMP",
+        "desc": "LDMP — a terminal music player with a cava-style real-time spectrum visualizer, built from scratch in C11. No runtime dependencies beyond ncurses and standard Linux audio.",
+        "link": "/ldmp",
+        "color": "#58ffc3",
+        "isPublic": false,
+        "tech": [
+            "C"
+        ],
+        "type": "media-player",
+        "img": "/images/1785856943744-ldmp.png",
+        "srcLink": "https://github.com/LenaDijksma/ldmp---music-player",
+        "page": {
+            "tag": "Private / Non-Commercial Project",
+            "heroDesc": "",
+            "aboutTitle": "",
+            "aboutParagraphs": [
+                "Card (short):",
+                "LDMP — a terminal music player with a cava-style real-time spectrum visualizer, built from scratch in C11. No runtime dependencies beyond ncurses and standard Linux audio.",
+                "Page (full description):",
+                "LDMP (Lena Dijksma Music Player) is a terminal-based music player written in plain C11, with a real-time spectrum visualizer inspired by cava. It was built to have zero runtime dependencies beyond a standard Linux audio stack and libncursesw — no Python, no external services, no bloated frameworks.",
+                "Playback runs on miniaudio, vendored as a single header directly in the source, decoding and playing MP3, WAV, and FLAC files through ALSA, PulseAudio, or PipeWire-pulse — whichever the system has available. The audio backend is loaded at runtime via dlopen, so the player doesn't even need audio dev packages to build.",
+                "The visualizer is powered by a hand-written radix-2 FFT run directly on the PCM samples as they're mixed to the output device, the same technique cava uses. Log-spaced frequency bands with auto-gain keep the display responsive across quiet and loud tracks alike, and bars are rendered with Unicode sub-character blocks so they animate smoothly instead of snapping between whole terminal rows.",
+                "Beyond playback, LDMP includes:",
+                "File-manager-style browsing — navigate your music folder by folder, with subfolders and tracks sorted alphabetically and grouped separately.\nLibrary-wide search that works from anywhere in the browsing tree.\nPlaylists stored as lightweight JSON files that reference track paths rather than copying audio, so they stay in sync with your library.\nA built-in ID3v2 reader for MP3 title/artist tags.\nMPRIS2 support (built automatically when libdbus-1-dev is present), so LDMP shows up in desktop \"now playing\" widgets like waybar or eww and responds to media keys.",
+                "The whole UI runs through ncursesw, with full keyboard control: play/pause, seek, volume, shuffle, repeat, and playlist management, all without leaving the keyboard.",
+                "Stack: C11, ncursesw, miniaudio, custom FFT implementation, JSON-based playlists, optional D-Bus/MPRIS2 integration."
+            ],
+            "showcaseImg": "/images/1785856943744-ldmp.png",
+            "showcaseCaption": ""
+        }
+    },
+    {
+        "title": "Website",
+        "name": "BizEase",
+        "desc": "BizEase supports entrepreneurs who want to grow but don't want to get bogged down in administration. No standard package, but help tailored to how you work.",
+        "link": "https://www.bizease.nl/",
+        "color": "#2bb8bb",
+        "isPublic": true,
+        "tech": [
+            "HTML",
+            "CSS"
+        ],
+        "type": "website",
+        "img": "/images/1787331760096-screenshot-2026-08-21-at-19-02-26-bizease-solutions.png"
+    },
+    {
+        "title": "server tool",
+        "name": "Deployd",
+        "desc": "A simple deploy tool with TUI for deploying websites",
+        "link": "/deployd",
+        "color": "#62a0ea",
+        "isPublic": false,
+        "tech": [
+            "C",
+            "Python",
+            "Shell"
+        ],
+        "type": "tool",
+        "img": "/images/1787760139269-20260826180158.png",
+        "srcLink": "https://github.com/LenaDijksma/deployd",
+        "page": {
+            "tag": "Private / Non-Commercial Project",
+            "heroDesc": "",
+            "aboutTitle": "",
+            "aboutParagraphs": [
+                "deployd is a lightweight deployment daemon built for personal servers and homelabs. It watches a server-side deployment directory for changes, automatically builds and launches projects from a simple .deployconfig.json, and can manage Nginx configuration for both static websites and reverse-proxied applications.",
+                "Projects are deployed by simply pushing them with rsync, removing the need for a CI/CD pipeline, Docker, or manually SSHing into the server for every update. It supports any runtime that can be started from the command line, including Node.js and ASP.NET Core/Razor Pages.",
+                "deployd also includes a lightweight status API and a C/ncurses terminal dashboard for remotely monitoring processes, viewing logs, managing deployments, and connecting to projects over SSH. The system is designed to stay simple and practical for the \"one server, several projects\" use case."
+            ],
+            "showcaseImg": "/images/1787760139269-20260826180158.png",
+            "showcaseCaption": "My current deployd TUI view"
+        }
+    }
+]

@@ -1,0 +1,247 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Lena Dijksma</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="shortcut icon" href="/images/logo.png" type="image/png">
+
+    <link href="vendor/remixicon/remixicon.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+
+    <script>
+        var savedTheme = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add("dark");
+        }
+    </script>
+</head>
+
+<body class="admin-body">
+    <div class="background-glow"></div>
+
+    <!-- ========================= -->
+    <!-- LOGIN VIEW -->
+    <!-- ========================= -->
+    <main id="login-view" class="admin-login-view" hidden>
+        <form id="login-form" class="admin-card admin-login-card">
+            <img src="/images/logo.png" alt="Logo" class="admin-login-logo" />
+            <h1 class="admin-title">Admin</h1>
+            <p class="admin-subtle">Enter the password to manage your projects.</p>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required />
+            </div>
+
+            <button type="submit" class="primary-btn admin-full-btn" id="login-btn">
+                <i class="ri-lock-unlock-line"></i>
+                Sign in
+            </button>
+
+            <p id="login-error" class="admin-error" hidden></p>
+        </form>
+    </main>
+
+    <!-- ========================= -->
+    <!-- DASHBOARD VIEW -->
+    <!-- ========================= -->
+    <main id="dashboard-view" class="admin-dashboard-view" hidden>
+        <header class="admin-header">
+            <div class="admin-header-title">
+                <img src="/images/logo.png" alt="Logo" class="admin-header-logo" />
+                <div class="stacked">
+                    <span>Projects</span>
+                    <span class="stacked-btm">Admin</span>
+                </div>
+            </div>
+
+            <div class="admin-header-actions">
+                <a href="/" class="admin-icon-btn" title="View site" target="_blank" rel="noopener noreferrer">
+                    <i class="ri-external-link-line"></i>
+                </a>
+                <button id="logout-btn" class="admin-icon-btn" title="Log out">
+                    <i class="ri-logout-box-r-line"></i>
+                </button>
+            </div>
+        </header>
+
+        <div id="status-banner" class="admin-status-banner" hidden></div>
+
+        <div id="projects-panel" class="admin-panel">
+            <div class="admin-toolbar">
+                <p class="admin-subtle" id="project-count">Loading projects…</p>
+                <button id="add-project-btn" class="primary-btn">
+                    <i class="ri-add-line"></i>
+                    Add project
+                </button>
+            </div>
+
+            <div id="projects-list" class="admin-projects-list"></div>
+        </div>
+    </main>
+
+    <!-- ========================= -->
+    <!-- EDIT / ADD MODAL -->
+    <!-- ========================= -->
+    <div id="editor-overlay" class="admin-overlay" hidden>
+        <form id="editor-form" class="admin-card admin-editor">
+            <h2 id="editor-title">Edit project</h2>
+
+            <div class="admin-editor-grid">
+                <div class="form-group">
+                    <label for="f-title">Title (category)</label>
+                    <input type="text" id="f-title" required placeholder="e.g. Healthcare Website" />
+                </div>
+
+                <div class="form-group">
+                    <label for="f-name">Name</label>
+                    <input type="text" id="f-name" required placeholder="e.g. NerineZorg" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="f-desc">Description</label>
+                <textarea id="f-desc" rows="3" required></textarea>
+            </div>
+
+            <div class="admin-editor-grid">
+                <div class="form-group">
+                    <label for="f-link">Link</label>
+                    <input type="text" id="f-link" required placeholder="https://... or /netscan" />
+                    <span class="admin-hint">For a generated page, use a path like <code>/netscan</code> — that becomes the URL.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-type">Type</label>
+                    <input type="text" id="f-type" required placeholder="e.g. website, personal" />
+                </div>
+            </div>
+
+            <div class="admin-editor-grid">
+                <div class="form-group">
+                    <label for="f-color">Accent color</label>
+                    <div class="admin-color-row">
+                        <input type="color" id="f-color-picker" value="#59213f" />
+                        <input type="text" id="f-color" required placeholder="#59213f" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-img">Image path</label>
+                    <div class="admin-image-row">
+                        <input type="text" id="f-img" placeholder="/images/example.webp" />
+                        <button type="button" class="admin-secondary-btn admin-upload-btn" id="f-img-upload-btn" title="Upload image">
+                            <i class="ri-upload-2-line"></i>
+                        </button>
+                        <input type="file" id="f-img-file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml" hidden />
+                    </div>
+                    <span class="admin-hint" id="f-img-status"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="f-tech">Tech (comma separated)</label>
+                <input type="text" id="f-tech" placeholder="HTML, CSS, JavaScript" />
+            </div>
+
+            <label class="admin-checkbox-row">
+                <input type="checkbox" id="f-public" />
+                Public project (link opens externally, shown in the public grid)
+            </label>
+
+            <div class="form-group" id="f-srclink-row">
+                <label for="f-srclink">Source code link</label>
+                <input type="text" id="f-srclink" placeholder="https://github.com/username/repo" />
+                <span class="admin-hint">Private projects only — shown as a "View source" link.</span>
+            </div>
+
+            <label class="admin-checkbox-row" id="f-generate-page-row">
+                <input type="checkbox" id="f-generate-page" />
+                Generate a project page at the link above (private projects only)
+            </label>
+
+            <div id="page-fields" class="admin-page-fields" hidden>
+
+                <div class="admin-editor-grid">
+                    <div class="form-group">
+                        <label for="f-page-tag">Tag line</label>
+                        <input type="text" id="f-page-tag" placeholder="Private / Non-Commercial Project" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="f-page-about-title">About section title</label>
+                        <input type="text" id="f-page-about-title" placeholder="Defaults to the project name" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-page-hero-desc">Hero description</label>
+                    <textarea id="f-page-hero-desc" rows="2" placeholder="Defaults to the description above"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="f-page-about">About section (blank line = new paragraph)</label>
+                    <textarea id="f-page-about" rows="6"></textarea>
+                </div>
+
+                <div class="admin-editor-grid">
+                    <div class="form-group">
+                        <label for="f-page-showcase-img">Showcase image path (optional)</label>
+                        <div class="admin-image-row">
+                            <input type="text" id="f-page-showcase-img" placeholder="/images/example-showcase.webp" />
+                            <button type="button" class="admin-secondary-btn admin-upload-btn" id="f-page-showcase-img-upload-btn" title="Upload image">
+                                <i class="ri-upload-2-line"></i>
+                            </button>
+                            <input type="file" id="f-page-showcase-img-file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml" hidden />
+                        </div>
+                        <span class="admin-hint" id="f-page-showcase-img-status"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="f-page-showcase-caption">Showcase caption (optional)</label>
+                        <input type="text" id="f-page-showcase-caption" />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="admin-editor-actions">
+                <button type="button" id="editor-cancel" class="admin-secondary-btn">Cancel</button>
+                <button type="submit" class="primary-btn">
+                    <i class="ri-check-line"></i>
+                    Save project
+                </button>
+            </div>
+
+            <p id="editor-error" class="admin-error" hidden></p>
+        </form>
+    </div>
+
+    <!-- ========================= -->
+    <!-- CONFIRM MODAL (reused for delete + discard) -->
+    <!-- ========================= -->
+    <div id="confirm-overlay" class="admin-overlay" hidden>
+        <div class="admin-card admin-confirm">
+            <h2 id="confirm-title">Delete this project?</h2>
+            <p class="admin-subtle" id="confirm-text"></p>
+            <div class="admin-editor-actions">
+                <button type="button" id="confirm-cancel" class="admin-secondary-btn">Cancel</button>
+                <button type="button" id="confirm-ok" class="admin-danger-btn">
+                    <i class="ri-delete-bin-line"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

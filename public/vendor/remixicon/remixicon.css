@@ -1,0 +1,52 @@
+/*
+* Remix Icon v4.3.0 - SUBSET
+* https://remixicon.com
+*
+* This is a trimmed build containing only the 16 icons actually used on
+* this site (see the icon list below), with the webfont subsetted to
+* match. The full icon set is ~2900 icons / ~165KB (woff2); this subset
+* is under 2KB. Regenerate by re-running the subsetting step if new
+* ri-* classes are added anywhere in the codebase.
+*
+* Icons included: ri-add-line, ri-arrow-right-up-line, ri-check-line, ri-delete-bin-line, ri-draggable, ri-external-link-line, ri-file-copy-line, ri-github-line, ri-loader-4-line, ri-lock-unlock-line, ri-logout-box-r-line, ri-mail-line, ri-moon-line, ri-pencil-line, ri-sun-line, ri-upload-2-line
+*
+* Original: Copyright RemixIcon.com, Apache License Version 2.0
+* https://github.com/Remix-Design/RemixIcon
+*/
+
+@font-face {
+  font-family: "remixicon";
+  src: url("remixicon.woff2") format("woff2"),
+  url("remixicon.woff") format("woff");
+  font-display: swap;
+}
+
+[class^="ri-"], [class*=" ri-"] {
+  font-family: 'remixicon' !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ri-lg { font-size: 1.3333em; line-height: 0.75em; vertical-align: -.0667em; }
+.ri-1x { font-size: 1em; }
+.ri-2x { font-size: 2em; }
+.ri-3x { font-size: 3em; }
+.ri-fw { text-align: center; width: 1.25em; }
+
+.ri-add-line:before { content: "\ea13"; }
+.ri-arrow-right-up-line:before { content: "\ea70"; }
+.ri-check-line:before { content: "\eb7b"; }
+.ri-delete-bin-line:before { content: "\ec2a"; }
+.ri-draggable:before { content: "\f38f"; }
+.ri-external-link-line:before { content: "\ecaf"; }
+.ri-file-copy-line:before { content: "\ecd5"; }
+.ri-github-line:before { content: "\edcb"; }
+.ri-loader-4-line:before { content: "\eec6"; }
+.ri-lock-unlock-line:before { content: "\eed2"; }
+.ri-logout-box-r-line:before { content: "\eeda"; }
+.ri-mail-line:before { content: "\eef6"; }
+.ri-moon-line:before { content: "\ef75"; }
+.ri-pencil-line:before { content: "\efe0"; }
+.ri-sun-line:before { content: "\f1bf"; }
+.ri-upload-2-line:before { content: "\f24a"; }

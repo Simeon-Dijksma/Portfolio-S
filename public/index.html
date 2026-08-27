@@ -1,0 +1,249 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lunix | Portfolio</title>
+    <link rel="shortcut icon" href="/images/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="/images/logo.png" sizes="180x180">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="vendor/aos/aos.css" />
+
+    <!-- Remix Icons -->
+    <link href="vendor/remixicon/remixicon.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/modules.css">
+
+    <!-- Extra Meta Tags -->
+    <meta name="theme-color" content="#59213f">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lunix | Portfolio" />
+    <meta property="og:description"
+        content="Lunix is a software development student from the Netherlands, focused on clean design and dependable code. Two live client sites shipped so far, with more personal projects underway." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lenadijksma.is-a.dev" />
+    <meta property="og:image" content="https://lenadijksma.is-a.dev/images/og-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lunix | Portfolio" />
+    <meta name="twitter:description"
+        content="Lunix is a software development student from the Netherlands, focused on clean design and dependable code. Two live client sites shipped so far, with more personal projects underway." />
+    <meta name="twitter:image" content="https://lenadijksma.is-a.dev/images/og-preview.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Lunix",
+        "url": "https://lenadijksma.is-a.dev",
+        "jobTitle": "Software Developer Student",
+        "email": "mailto:lenadijksma08@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "NL"
+        },
+        "sameAs": [
+            "https://github.com/LenaDijksma"
+        ]
+    }
+    </script>
+
+    <script>
+        var savedTheme = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add("dark");
+        }
+        document.documentElement.classList.add("no-transition");
+        window.addEventListener("load", () => {
+            document.documentElement.classList.remove("no-transition");
+        });
+    </script>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <header class="header">
+        <div class="logo">
+            <div class="stacked">
+                <span>Lunix</span>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="#projects">Projects</a>
+            <a href="#socials">Socials</a>
+        </nav>
+
+        <div class="theme-selector">
+            <button id="theme-trigger" aria-label="Toggle light/dark mode">
+                <i class="ri-moon-line"></i>
+            </button>
+        </div>
+
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content" data-aos="fade-up">
+                <p class="small-text">Software Developer Student</p>
+                <p class="sub-text">Netherlands · ROC van Twente</p>
+
+                <h1 class="typing-title">
+                    <span id="typed-text"></span>
+                </h1>
+
+                <p class="description">
+                    A beginner software dev in the netherlands. Focused on profesional design.
+                </p>
+
+                <a href="#projects" class="primary-btn">
+                    View Projects
+                </a>
+            </div>
+        </section>
+
+        <section class="tech-section" data-aos="fade-up">
+            <div class="tech-list">
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="50">
+                    <a href="https://en.wikipedia.org/wiki/HTML" class="tech-pill" target="_blank">HTML</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="100">
+                    <a href="https://en.wikipedia.org/wiki/CSS" class="tech-pill" target="_blank">CSS</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="150">
+                    <a href="https://en.wikipedia.org/wiki/JavaScript" class="tech-pill" target="_blank">JS</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://en.wikipedia.org/wiki/C_Sharp_(programming_language)" class="tech-pill"
+                        target="_blank">C#</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="250">
+                    <a href="https://en.wikipedia.org/wiki/SQL" class="tech-pill" target="_blank">SQL</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="300">
+                    <a href="https://en.wikipedia.org/wiki/Git" class="tech-pill" target="_blank">git</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="350">
+                    <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" class="tech-pill" target="_blank">Bash</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="400">
+                    <a href="https://en.wikipedia.org/wiki/Node.js" class="tech-pill" target="_blank">NodeJS</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="450">
+                    <a href="https://en.wikipedia.org/wiki/linux" class="tech-pill" target="_blank">Linux</a>
+                </div>
+
+                <div class="tech-item" data-aos="fade-up" data-aos-delay="500">
+                    <a href="https://en.wikipedia.org/wiki/tailscale" class="tech-pill" target="_blank">Tailscale</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+
+            <div class="content">
+                <div class="section-title" data-aos="fade-up">
+                    <p>About</p>
+                    <h2>Lunix</h2>
+                </div>
+
+                <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+                    <p>I am Lunix, A beginner software development student located in the netherlands.
+                        I originally started coding around 13 years old beginning with websites and simple python
+                        projects.
+                        <br>
+                        Eventually i continued into studying software development at ROC van Twente where i have learned
+                        a lot more.
+                        <br>
+                        I have built websites with html css js but i have also used node.js and Razor pages.
+                        <br>
+                        <br>
+                        I use linux as my daily driver OS as i am not very fond of microsoft however if it is required i
+                        do have the ability to dualboot windows for windows specific applications.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="git" class="git-section">
+            <div class="git-commits"></div>
+        </section>
+
+        <section id="projects" class="projects-section">
+
+            <div class="section-title" data-aos="fade-up">
+                <p>Selected Work</p>
+                <h2>Public Projects</h2>
+            </div>
+
+            <div class="projects-grid" id="public-projects"></div>
+
+        </section>
+
+        <section class="projects-section">
+
+            <div class="section-title" data-aos="fade-up">
+                <p>Personal Work</p>
+                <h2>Private/Non-commercial Projects</h2>
+            </div>
+
+            <div class="projects-grid" id="private-projects"></div>
+
+        </section>
+
+        <section id="links" class="links-section">
+
+            <div class="links-card" data-aos="fade-up">
+
+                <div class="section-title left-align">
+                    <p>Links</p>
+                    <h2>Elsewhere Online</h2>
+                </div>
+
+                <div class="links-div">
+                    <span class="link">
+                        <i class="ri-github-line icon"></i><a href="https://github.com/Simeon-Dijksma"
+                            class="no-deco-link" target="_blank">Github</a>
+                    </span>
+                    <span class="link">
+                        <i class="ri-mail-line icon"></i><a href="mailto:simeondijksma08@gmail.com"
+                            class="no-deco-link">simeondijksma08@gmail.com</a>
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Lunix</p>
+    </footer>
+
+    <!-- AOS -->
+    <script src="vendor/aos/aos.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/modules.js"></script>
+</body>
+
+</html>

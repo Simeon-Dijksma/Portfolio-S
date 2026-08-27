@@ -1,0 +1,104 @@
+<!-- placeholder.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>404 Page | Lena Dijksma</title>
+
+    <link rel="shortcut icon" href="/images/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="/images/logo.png" sizes="180x180">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="/vendor/aos/aos.css" />
+
+    <!-- Remix Icons -->
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+
+    <!-- SAME CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Extra Meta Tags -->
+    <meta name="theme-color" content="#59213f">
+
+    <script>
+        var savedTheme = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add("dark");
+        }
+        document.documentElement.classList.add("no-transition");
+        window.addEventListener("load", () => {
+            document.documentElement.classList.remove("no-transition");
+        });
+    </script>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <!-- SAME HEADER -->
+    <header class="header">
+        <div class="logo">
+            <div class="stacked">
+                <span>Lena</span>
+                <span class="stacked-btm">Dijksma</span>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="/#projects">Back to Portfolio</a>
+        </nav>
+
+        <div class="theme-selector">
+            <button id="theme-trigger" aria-label="Toggle light/dark mode">
+                <i class="ri-moon-line"></i>
+            </button>
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero small-hero">
+
+            <div class="hero-content" data-aos="fade-up">
+
+                <p class="small-text">
+                    Error page
+                </p>
+
+                <h1 class="page-title">
+                    404 page not found
+                </h1>
+
+                <p class="description">
+                    The page you're looking for doesn't exist, or the link may be outdated.
+                </p>
+
+                <a href="/#projects" class="primary-btn">
+                    Back To Portfolio
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Lena Dijksma</p>
+    </footer>
+
+    <!-- AOS -->
+    <script src="/vendor/aos/aos.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

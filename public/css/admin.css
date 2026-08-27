@@ -1,0 +1,464 @@
+/* admin.css */
+
+/* Make sure the [hidden] attribute always wins, even when a class
+   on the same element sets its own `display` (e.g. the overlays). */
+[hidden] {
+    display: none !important;
+}
+
+.admin-body {
+    min-height: 100vh;
+    padding: 2rem 1.5rem 4rem;
+}
+
+.admin-subtle {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* ========================= */
+/* SHARED CARD */
+/* ========================= */
+
+.admin-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+}
+
+/* ========================= */
+/* LOGIN */
+/* ========================= */
+
+.admin-login-view {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-login-card {
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.admin-login-logo {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
+.admin-login-card h1 {
+    font-size: 1.6rem;
+}
+
+.admin-full-btn {
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.admin-error {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+}
+
+.admin-title {
+    color: var(--text-dark);
+}
+
+/* ========================= */
+/* DASHBOARD HEADER */
+/* ========================= */
+
+.admin-dashboard-view {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.admin-header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.admin-header-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+}
+
+.admin-header-actions {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.admin-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text-dark);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-icon-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+/* ========================= */
+/* STATUS BANNER */
+/* ========================= */
+
+.admin-status-banner {
+    padding: 0.9rem 1.2rem;
+    border-radius: 14px;
+    margin-bottom: 1.2rem;
+    font-size: 0.92rem;
+    border: 1px solid var(--border);
+}
+
+.admin-status-banner.success {
+    background: rgba(45, 212, 167, 0.12);
+    border-color: rgba(45, 212, 167, 0.4);
+    color: #1f9d78;
+}
+
+.admin-status-banner.warning {
+    background: rgba(233, 210, 39, 0.12);
+    border-color: rgba(233, 210, 39, 0.4);
+    color: #a8890a;
+}
+
+.admin-status-banner.error {
+    background: rgba(255, 107, 107, 0.12);
+    border-color: rgba(255, 107, 107, 0.4);
+    color: #d64545;
+}
+
+/* ========================= */
+/* TOOLBAR */
+/* ========================= */
+
+.admin-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    gap: 1rem;
+}
+
+/* ========================= */
+/* PROJECTS LIST */
+/* ========================= */
+
+.admin-projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.admin-project-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.3rem;
+    border-radius: 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.admin-project-row:hover {
+    background: #ebe4c9;
+}
+
+.admin-project-row.dragging {
+    opacity: 0.45;
+}
+
+.admin-project-row.drag-over {
+    border-color: var(--accent);
+    background: rgba(111, 208, 242, 0.10);
+}
+
+.admin-drag-handle {
+    cursor: grab;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.admin-drag-handle:active {
+    cursor: grabbing;
+}
+
+.admin-project-swatch {
+    width: 10px;
+    height: 42px;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.admin-project-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-project-info h3 {
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dark);
+}
+
+.admin-project-info p {
+    color: var(--text-dark);
+    font-size: 0.88rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-visibility-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.admin-visibility-tag.public {
+    background: rgba(45, 212, 167, 0.15);
+    color: var(--pub-theme-res);
+}
+
+.admin-visibility-tag.private {
+    background: rgba(111, 208, 242, 0.22);
+    color: var(--priv-theme-res);
+}
+
+.admin-srclink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.3rem;
+    font-size: 0.82rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.admin-srclink:hover {
+    text-decoration: underline;
+}
+
+.admin-project-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.admin-empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-light);
+}
+
+/* ========================= */
+/* SECONDARY / DANGER BUTTONS */
+/* ========================= */
+
+.admin-secondary-btn,
+.admin-danger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dark);
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #ffffff00;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.3s ease;
+}
+
+.admin-secondary-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    background-color: #d1b76a60;
+}
+
+.admin-danger-btn {
+    background: #ff6b6b;
+    border-color: #ff6b6b;
+    color: #fff;
+}
+
+.admin-danger-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.admin-project-actions button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+}
+
+/* ========================= */
+/* OVERLAY / MODAL */
+/* ========================= */
+
+.admin-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+}
+
+.admin-editor,
+.admin-confirm {
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    background-color: var(--card);
+    color: var(--text-dark);
+}
+
+.admin-editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.admin-color-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.admin-color-row input[type="color"] {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: none;
+    cursor: pointer;
+}
+
+.admin-image-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+}
+
+.admin-image-row input[type="text"] {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-upload-btn {
+    flex-shrink: 0;
+    width: 48px;
+    padding: 0;
+}
+
+.admin-hint.error {
+    color: #ff6b6b;
+}
+
+.admin-hint.success {
+    color: #1f9d78;
+}
+
+.admin-hint {
+    font-size: 0.78rem;
+    color: var(--text-light);
+}
+
+.admin-hint code {
+    background: rgba(111, 208, 242, 0.18);
+    padding: 0.1rem 0.35rem;
+    border-radius: 6px;
+}
+
+.admin-page-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 1.1rem;
+    border: 1px dashed var(--border);
+    border-radius: 16px;
+    background: rgba(111, 208, 242, 0.08);
+}
+
+.admin-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.admin-checkbox-row input {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-editor-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.7rem;
+    margin-top: 0.3rem;
+}
+
+@media (max-width: 640px) {
+    .admin-editor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-project-row {
+        flex-wrap: wrap;
+    }
+}
+
+.admin-panel {
+    display: block;
+}

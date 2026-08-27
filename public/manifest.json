@@ -1,0 +1,15 @@
+{
+    "name": "Lunix | Portfolio",
+    "short_name": "Lunix",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#b0d6cb",
+    "theme_color": "#59213f",
+    "icons": [
+        {
+            "src": "/images/logo.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}

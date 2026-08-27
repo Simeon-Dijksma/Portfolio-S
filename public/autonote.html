@@ -1,0 +1,183 @@
+<!-- placeholder.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Autonote | Lena Dijksma</title>
+
+    <link rel="shortcut icon" href="/images/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="/images/logo.png" sizes="180x180">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- AOS -->
+    <link rel="stylesheet" href="vendor/aos/aos.css" />
+
+    <!-- Remix Icons -->
+    <link href="vendor/remixicon/remixicon.css" rel="stylesheet" />
+
+    <!-- SAME CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Extra Meta Tags -->
+    <meta name="theme-color" content="#59213f">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lena Dijksma | Autonote" />
+    <meta property="og:description"
+        content="Autonote Suite. My first public personal project. A Markdown daytracking system." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lenadijksma.is-a.dev/autonote" />
+    <meta property="og:image" content="https://lenadijksma.is-a.dev/images/og-preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lena Dijksma | Autonote" />
+    <meta name="twitter:description"
+        content="Autonote Suite. My first public personal project. A Markdown daytracking system." />
+    <meta name="twitter:image" content="https://lenadijksma.is-a.dev/images/og-preview.png" />
+
+    <script>
+        var savedTheme = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+            document.documentElement.classList.add("dark");
+        }
+        document.documentElement.classList.add("no-transition");
+        window.addEventListener("load", () => {
+            document.documentElement.classList.remove("no-transition");
+        });
+    </script>
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <!-- SAME HEADER -->
+    <header class="header">
+        <div class="logo">
+            <div class="stacked">
+                <span>Lena</span>
+                <span class="stacked-btm">Dijksma</span>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="/#projects">Back to Portfolio</a>
+        </nav>
+
+        <div class="theme-selector">
+            <button id="theme-trigger" aria-label="Toggle light/dark mode">
+                <i class="ri-moon-line"></i>
+            </button>
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero small-hero">
+
+            <div class="hero-content" data-aos="fade-up">
+
+                <p class="small-text">
+                    Private / Non-Commercial Project
+                </p>
+
+                <h1 class="page-title">
+                    Autonote Systems
+                </h1>
+
+                <p class="description">
+                    This project was created as a personal day tracker to see how different lifestyle choices impact
+                    sleep and happiness.
+                </p>
+
+                <a href="/#projects" class="primary-btn">
+                    Back To Portfolio
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- TECH STACK -->
+        <section class="tech-section">
+
+            <div class="section-title" data-aos="fade-up">
+                <p>Development</p>
+                <h2>Technologies</h2>
+            </div>
+
+            <div class="tech-list" data-aos="fade-up">
+
+                <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank" rel="noopener noreferrer"
+                    class="tech-pill">
+                    bash
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- ABOUT -->
+        <section class="about-project-section">
+
+            <div class="about-project-content" data-aos="fade-up">
+
+                <div class="section-title left-align">
+                    <p>About</p>
+                    <h2>Autonote Systems</h2>
+                </div>
+
+                <p>
+                    AutoNote is a small suite of bash scripts for tracking mood and energy over time as plain numbers,
+                    run straight from the terminal with no GUI. Everything is written to Markdown files in an Obsidian
+                    vault, under a configurable path that defaults to Documents/obsidian/Main/011-autonote. I built it
+                    to track how lifestyle changes and medication adjustments were actually affecting my day to day, so
+                    I could see what was helping and what wasn't instead of just guessing. <br>
+                    <br>
+                    The suite has three parts. newnote.sh creates the note for the current day, prompting for mood
+                    (1-10), energy (1-5), current focus, and plans, and writing it out as a Markdown file with YAML
+                    frontmatter plus a body for freeform notes and links. It can be run more than once a day, in which
+                    case it backs up the existing note and appends a new timestamped section rather than overwriting
+                    anything, though only the first entry of the day is what weeklystats and monthlystats actually read.
+                    It also maintains a running index file with a log of every note created and a total count. <br>
+                    <br>
+                    weeklystats.sh and monthlystats.sh both work the same way, just over different windows: they walk
+                    through each day's note, pull the mood and energy values out of the frontmatter, and generate a
+                    summary file with overall averages, a line chart plotting both values over the period, and a
+                    breakdown table. Weeklystats runs Monday to Sunday and includes a per-day note list; monthlystats
+                    covers the full calendar month and breaks it down week by week, along with flagging the best and
+                    lowest mood days. Both accept an optional offset argument to look back at a previous week or month
+                    instead of the current one. <br>
+                    <br>
+                    All three scripts share the same terminal styling, with colored status messages and clear errors if
+                    the configured paths don't exist, so failures are obvious rather than silent.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="project-showcase">
+            <img src="images/autonote.webp" alt="Autonote output showcase" class="project-image">
+            <p class="small-text">Running <strong>newnote</strong> for the second time that day — note the append
+                behavior</p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Lena Dijksma</p>
+    </footer>
+
+    <!-- AOS -->
+    <script src="vendor/aos/aos.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
