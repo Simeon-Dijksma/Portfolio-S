@@ -132,7 +132,7 @@ async function commitFileToGitHub(repoFilePath, base64Content, message) {
     const apiUrl = `https://api.github.com/repos/${repo}/contents/${repoFilePath}`;
     const headers = {
         Authorization: `Bearer ${token}`,
-        'User-Agent': 'lenadijksma-portfolio-admin',
+        'User-Agent': 'lunix-portfolio-admin',
         Accept: 'application/vnd.github+json'
     };
 
@@ -191,7 +191,7 @@ async function getProjectsFromGitHub() {
         const res = await fetch(apiUrl, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                'User-Agent': 'lenadijksma-portfolio-admin',
+                'User-Agent': 'lunix-portfolio-admin',
                 Accept: 'application/vnd.github+json'
             }
         });
@@ -458,7 +458,7 @@ router.post("/send-email", contactLimiter, async (req, res) => {
             await resend.emails.send({
 
                 from:
-                    'Portfolio Contact <noreply@lenadijksma.is-a.dev>',
+                    'Portfolio Contact <noreply@lunix.is-a.dev>',
 
                 to:
                     'lenadijksma08@gmail.com',

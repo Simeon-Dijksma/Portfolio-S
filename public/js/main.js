@@ -46,10 +46,10 @@ if (!localStorage.getItem("theme")) {
 // =========================
 
 const texts = [
-    "Building modern frontends.",
-    "Engineering reliable backends.",
-    "Crafting applications in C#.",
-    "Shipping full-stack projects.",
+    "building modern frontends",
+    "engineering reliable backends",
+    "crafting applications in C#",
+    "shipping full-stack projects",
 ];
 
 const typedText =
@@ -134,15 +134,17 @@ if (typedText && typingTitle) {
         const currentText =
             texts[textIndex];
 
+        const cursor = '<span class="cursor">▋</span>';
+
         if (isDeleting) {
 
-            typedText.textContent =
-                currentText.substring(0, charIndex--);
+            typedText.innerHTML =
+                currentText.substring(0, charIndex--) + cursor;
 
         } else {
 
-            typedText.textContent =
-                currentText.substring(0, charIndex++);
+            typedText.innerHTML =
+                currentText.substring(0, charIndex++) + cursor;
         }
 
         let speed =
@@ -337,186 +339,6 @@ fetch("/data/projects.json")
             error
         );
     });
-
-// =========================
-// CONTACT FORM
-// =========================
-
-const contactForm =
-    document.getElementById("contact-form");
-
-const formFeedback =
-    document.getElementById("form-feedback");
-
-function showFeedback(message, type) {
-
-    if (!formFeedback) return;
-
-    formFeedback.textContent = message;
-    formFeedback.className = `form-feedback ${type}`;
-    formFeedback.style.display = "block";
-
-    if (type === "success") {
-        setTimeout(() => {
-            formFeedback.style.display = "none";
-        }, 5000);
-    }
-}
-
-// =========================
-// LAZY-LOAD RECAPTCHA
-// =========================
-// reCAPTCHA's script does its own layout/sizing work once it runs, which
-// is expensive under mobile CPU throttling and was flagged as part of
-// the "Forced reflow" / render-blocking cost on every single page view -
-// even for visitors who never reach the contact form. Load it only once
-// the form is about to scroll into view instead.
-
-let recaptchaLoadPromise = null;
-
-function loadRecaptcha() {
-    if (recaptchaLoadPromise) return recaptchaLoadPromise;
-
-    recaptchaLoadPromise = new Promise((resolve) => {
-        const script = document.createElement("script");
-        script.src = "https://www.google.com/recaptcha/api.js";
-        script.async = true;
-        script.onload = resolve;
-        document.head.appendChild(script);
-    });
-
-    return recaptchaLoadPromise;
-}
-
-if (contactForm) {
-    if ("IntersectionObserver" in window) {
-        const recaptchaObserver = new IntersectionObserver((entries) => {
-            if (entries.some(entry => entry.isIntersecting)) {
-                loadRecaptcha();
-                recaptchaObserver.disconnect();
-            }
-        }, { rootMargin: "600px" });
-
-        recaptchaObserver.observe(contactForm);
-    } else {
-        loadRecaptcha();
-    }
-}
-
-if (contactForm) {
-
-    contactForm.addEventListener(
-        "submit",
-        async (e) => {
-
-            e.preventDefault();
-
-            const submitBtn = contactForm.querySelector(".contact-btn");
-            submitBtn.disabled = true;
-            submitBtn.classList.add("loading");
-            submitBtn.innerHTML = `<i class="ri-loader-4-line"></i>`;
-
-            // Safety net: normally already loaded via the IntersectionObserver
-            // above by the time someone's ready to submit, but this covers
-            // edge cases (e.g. keyboard navigation without a scroll event).
-            await loadRecaptcha();
-
-            const formData =
-                new FormData(contactForm);
-
-            const data = {
-
-                name:
-                    formData.get("name"),
-
-                email:
-                    formData.get("email"),
-
-                subject:
-                    formData.get("subject"),
-
-                message:
-                    formData.get("message"),
-
-                company:
-                    formData.get("company"),
-
-                captcha:
-                    grecaptcha.getResponse()
-            };
-
-            if (!data.captcha) {
-
-                showFeedback(
-                    "Please complete the captcha.",
-                    "error"
-                );
-
-                submitBtn.disabled = false;
-                submitBtn.classList.remove("loading");
-                submitBtn.innerHTML = "Send Message";
-
-                return;
-            }
-
-            try {
-
-                const response =
-                    await fetch("/send-email", {
-
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify(data)
-                    });
-
-                const result =
-                    await response.json();
-
-                if (result.success) {
-
-                    showFeedback(
-                        "Message sent successfully!",
-                        "success"
-                    );
-
-                    contactForm.reset();
-                    grecaptcha.reset();
-
-
-                } else {
-
-                    showFeedback(
-                        "Failed to send message. Please try again.",
-                        "error"
-                    );
-
-                    grecaptcha.reset();
-                }
-
-            } catch (error) {
-
-                console.error(error);
-
-                showFeedback(
-                    "Something went wrong. Please try again later.",
-                    "error"
-                );
-            } finally {
-
-                submitBtn.disabled = false;
-                submitBtn.classList.remove("loading");
-                submitBtn.innerHTML = "Send Message";
-            }
-
-        }
-    );
-}
 
 // =========================
 // FOOTER

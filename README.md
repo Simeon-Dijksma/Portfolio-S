@@ -1,7 +1,7 @@
-# LenaDijksma-Portfolio
+# Lunix-Portfolio
 My personal portfolio website
 
-https://lenadijksma.is-a.dev/
+https://lunix.is-a.dev/
 
 ## Stack
 - Frontend: HTML, CSS, JavaScript
@@ -56,7 +56,7 @@ ADMIN_PASSWORD=
 ### on this repo — required on Vercel, since it's how saves/uploads persist
 GITHUB_TOKEN=
 
-### "owner/repo", e.g. LenaDijksma/LenaDijksma-Portfolio
+### "owner/repo", e.g. Lunix/Lunix-Portfolio
 GITHUB_REPO=
 
 ### git-calendar (used by the /api/github/contributions route)
@@ -77,12 +77,12 @@ reply from a "Messages" tab in the admin panel. Requires:
    automatically. Tables are created on first use, no manual migration step.
 2. Set `SESSION_SECRET` to a long random string (`openssl rand -hex 32`) —
    used to sign client session cookies. Must differ from `ADMIN_PASSWORD`.
-3. Set `SITE_ORIGIN` to your live URL (e.g. `https://lenadijksma.is-a.dev`),
+3. Set `SITE_ORIGIN` to your live URL (e.g. `https://lunix.is-a.dev`),
    used to build links in emails.
 
 ```
 DATABASE_URL=
 SESSION_SECRET=
-SITE_ORIGIN=https://lenadijksma.is-a.dev
+SITE_ORIGIN=https://lunix.is-a.dev
 ```
 

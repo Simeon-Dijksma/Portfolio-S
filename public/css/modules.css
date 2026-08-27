@@ -27,7 +27,8 @@
 }
 
 .git-calendar-title::before {
-    content: "";
+    content: "> ";
+    color: var(--accent);
 }
 
 .git-calendar-scroll {
@@ -44,7 +45,7 @@
 
 .git-calendar-scroll::-webkit-scrollbar-thumb {
     background: var(--border);
-    border-radius: 999px;
+    border-radius: var(--radius-sm);
 }
 
 .git-calendar-grid {
@@ -71,7 +72,7 @@
     width: 12px;
     height: 12px;
 
-    border-radius: 3px;
+    border-radius: 1px;
     border: 1px solid var(--border);
 
     transition: transform .15s var(--ease);

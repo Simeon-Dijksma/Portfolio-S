@@ -4,7 +4,7 @@
         "name": "NerineZorg",
         "desc": "Modern website for a Dutch ZZP outpatient care company with a lighthouse rating of 99-100. Made to be personal and clear.",
         "link": "http://nerinezorg.nl",
-        "color": "#c65a8a",
+        "color": "#cc1b1b",
         "isPublic": true,
         "tech": [
             "HTML",
@@ -19,7 +19,7 @@
         "name": "Fridge Emblem Collection",
         "desc": "Website showcasing the world's biggest fridge emblem collection with a modern and organized gallery layout.",
         "link": "https://refrigeratoremblems.com/",
-        "color": "#a9cfe6",
+        "color": "#707070",
         "isPublic": true,
         "tech": [
             "HTML",
@@ -35,7 +35,7 @@
         "name": "Autonote Systems",
         "desc": "The autonote tool and associated tools were made to track days weeks months and eventually years.",
         "link": "/autonote",
-        "color": "#8033c9",
+        "color": "#a31d1d",
         "isPublic": false,
         "tech": [
             "Bash"
@@ -49,7 +49,7 @@
         "name": "NetScan",
         "desc": "a small c program that scans your network for devices and open ports. it also displays hostname(if found) vendor and more.",
         "link": "/netscan",
-        "color": "#43ae39",
+        "color": "#5a5a5a",
         "isPublic": false,
         "tech": [
             "C"
@@ -76,7 +76,7 @@
         "name": "Localhost Port Scanner (portscan)",
         "desc": "A C command-line tool that scans a given port range on localhost and identifies which process is listening on each port.",
         "link": "/portscan",
-        "color": "#26a269",
+        "color": "#8f1c1c",
         "isPublic": false,
         "tech": [
             "C",
@@ -108,7 +108,7 @@
         "name": "Raspberry Pi Wi-Fi to Ethernet Router",
         "desc": "Configured a Raspberry Pi 3B as a Wi-Fi-to-Ethernet router using NetworkManager, dnsmasq, and nftables.",
         "link": "/pi3b-router",
-        "color": "#e01b24",
+        "color": "#6e6e6e",
         "isPublic": false,
         "tech": [
             "Linux",
@@ -143,7 +143,7 @@
         "name": "Moduloro",
         "desc": "a simple website to host tools on, it loads js from '/tools' and loads them in the sidebar. when clicked render(container) is ran and your page will load.",
         "link": "/moduloro",
-        "color": "#57e389",
+        "color": "#d1291b",
         "isPublic": false,
         "tech": [
             "HTML",
@@ -175,7 +175,7 @@
         "name": "ldcss",
         "desc": "A custom css framework with css and js. techy style but with escape hatches for more fluid styles",
         "link": "/ldcss",
-        "color": "#99c1f1",
+        "color": "#4d4d4d",
         "public": false,
         "tech": [
             "CSS",
@@ -204,7 +204,7 @@
         "name": "ld-graphs",
         "desc": "A simple graph system for html that slots nicely into the pre-existing ldcss framework.",
         "link": "/ldgraphs",
-        "color": "#813d9c",
+        "color": "#b22222",
         "isPublic": false,
         "tech": [
             "HTML",
@@ -235,7 +235,7 @@
         "name": "LDMP",
         "desc": "LDMP — a terminal music player with a cava-style real-time spectrum visualizer, built from scratch in C11. No runtime dependencies beyond ncurses and standard Linux audio.",
         "link": "/ldmp",
-        "color": "#58ffc3",
+        "color": "#7a7a7a",
         "isPublic": false,
         "tech": [
             "C"
@@ -251,7 +251,7 @@
                 "Card (short):",
                 "LDMP — a terminal music player with a cava-style real-time spectrum visualizer, built from scratch in C11. No runtime dependencies beyond ncurses and standard Linux audio.",
                 "Page (full description):",
-                "LDMP (Lena Dijksma Music Player) is a terminal-based music player written in plain C11, with a real-time spectrum visualizer inspired by cava. It was built to have zero runtime dependencies beyond a standard Linux audio stack and libncursesw — no Python, no external services, no bloated frameworks.",
+                "LDMP (Lunix Music Player) is a terminal-based music player written in plain C11, with a real-time spectrum visualizer inspired by cava. It was built to have zero runtime dependencies beyond a standard Linux audio stack and libncursesw — no Python, no external services, no bloated frameworks.",
                 "Playback runs on miniaudio, vendored as a single header directly in the source, decoding and playing MP3, WAV, and FLAC files through ALSA, PulseAudio, or PipeWire-pulse — whichever the system has available. The audio backend is loaded at runtime via dlopen, so the player doesn't even need audio dev packages to build.",
                 "The visualizer is powered by a hand-written radix-2 FFT run directly on the PCM samples as they're mixed to the output device, the same technique cava uses. Log-spaced frequency bands with auto-gain keep the display responsive across quiet and loud tracks alike, and bars are rendered with Unicode sub-character blocks so they animate smoothly instead of snapping between whole terminal rows.",
                 "Beyond playback, LDMP includes:",
@@ -268,7 +268,7 @@
         "name": "BizEase",
         "desc": "BizEase supports entrepreneurs who want to grow but don't want to get bogged down in administration. No standard package, but help tailored to how you work.",
         "link": "https://www.bizease.nl/",
-        "color": "#2bb8bb",
+        "color": "#9c1414",
         "isPublic": true,
         "tech": [
             "HTML",
@@ -282,7 +282,7 @@
         "name": "Deployd",
         "desc": "A simple deploy tool with TUI for deploying websites",
         "link": "/deployd",
-        "color": "#62a0ea",
+        "color": "#616161",
         "isPublic": false,
         "tech": [
             "C",

@@ -3,8 +3,8 @@
     "short_name": "Lunix",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#b0d6cb",
-    "theme_color": "#59213f",
+    "background_color": "#0a0a0a",
+    "theme_color": "#0a0a0a",
     "icons": [
         {
             "src": "/images/logo.png",

@@ -20,20 +20,20 @@
     <link rel="stylesheet" href="css/modules.css">
 
     <!-- Extra Meta Tags -->
-    <meta name="theme-color" content="#59213f">
+    <meta name="theme-color" content="#0a0a0a">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Lunix | Portfolio" />
     <meta property="og:description"
         content="Lunix is a software development student from the Netherlands, focused on clean design and dependable code. Two live client sites shipped so far, with more personal projects underway." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://lenadijksma.is-a.dev" />
-    <meta property="og:image" content="https://lenadijksma.is-a.dev/images/og-preview.png" />
+    <meta property="og:url" content="https://lunix.is-a.dev" />
+    <meta property="og:image" content="https://lunix.is-a.dev/images/og-preview.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Lunix | Portfolio" />
     <meta name="twitter:description"
         content="Lunix is a software development student from the Netherlands, focused on clean design and dependable code. Two live client sites shipped so far, with more personal projects underway." />
-    <meta name="twitter:image" content="https://lenadijksma.is-a.dev/images/og-preview.png" />
+    <meta name="twitter:image" content="https://lunix.is-a.dev/images/og-preview.png" />
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -41,9 +41,9 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Lunix",
-        "url": "https://lenadijksma.is-a.dev",
+        "url": "https://lunix.is-a.dev",
         "jobTitle": "Software Developer Student",
-        "email": "mailto:lenadijksma08@gmail.com",
+        "email": "mailto:simeondijksma08@gmail.com",
         "address": {
             "@type": "PostalAddress",
             "addressCountry": "NL"
@@ -72,9 +72,9 @@
 
     <header class="header">
         <div class="logo">
-            <div class="stacked">
-                <span>Lunix</span>
-            </div>
+            <a href="/" class="brand-mark" aria-label="Lunix home">
+                <span class="brand-prompt">&gt;_</span><span class="brand-name">Lunix</span>
+            </a>
         </div>
 
         <nav class="nav">
@@ -101,7 +101,8 @@
                 </h1>
 
                 <p class="description">
-                    A beginner software dev in the netherlands. Focused on profesional design.
+                    First-year software development student in the Netherlands,
+                    building clean, well-considered interfaces backed by solid code.
                 </p>
 
                 <a href="#projects" class="primary-btn">
@@ -166,18 +167,25 @@
                 </div>
 
                 <div class="about-card" data-aos="fade-up" data-aos-delay="200">
-                    <p>I am Lunix, A beginner software development student located in the netherlands.
-                        I originally started coding around 13 years old beginning with websites and simple python
-                        projects.
-                        <br>
-                        Eventually i continued into studying software development at ROC van Twente where i have learned
-                        a lot more.
-                        <br>
-                        I have built websites with html css js but i have also used node.js and Razor pages.
-                        <br>
-                        <br>
-                        I use linux as my daily driver OS as i am not very fond of microsoft however if it is required i
-                        do have the ability to dualboot windows for windows specific applications.
+                    <p>
+                        I'm Lunix, an 18-year-old trans software development student from the
+                        Netherlands. I got into coding almost by accident. A friend pushed me to try web
+                        development, and it hooked me almost immediately. I spent a while bouncing between web
+                        dev and game dev before eventually dropping the latter and gravitating toward something
+                        else entirely: building small terminal applications. There's something I like about the
+                        constraint of a command line, no framework to lean on, just you and the problem.
+                    </p>
+                    <p>
+                        Right now I'm splitting my time between school and personal projects. At ROC van Twente
+                        I'm learning Razor Pages. Outside of class I'm building ldcss, a CSS framework built to
+                        be structured but not rigid, ldmp, a terminal-based music player, and working on client
+                        work like NerineZorg alongside my own portfolio.
+                    </p>
+                    <p>
+                        I care about clean design and dependable code in equal measure. I'd rather ship something
+                        a little smaller that actually holds together than something flashy that doesn't. That's
+                        shown up in most of what I build: a bit of structure, with enough give in it to stay fun
+                        to work in.
                     </p>
                 </div>
             </div>
@@ -230,6 +238,56 @@
                     </span>
                 </div>
 
+            </div>
+
+        </section>
+
+        <section id="socials" class="contact-section">
+
+            <div class="content">
+                <div class="contact-grid" data-aos="fade-up">
+
+                    <div class="section-title left-align">
+                        <p>Contact</p>
+                        <h2>Get In Touch</h2>
+                    </div>
+
+                    <p class="contact-description">
+                        Have a project in mind or a question about my work? Reach out directly,
+                        I'll get back to you promptly.
+                    </p>
+
+                    <div class="contact-info">
+
+                        <div class="contact-item">
+                            <span>Email</span>
+
+                            <div class="email-copy-row">
+                                <a href="mailto:simeondijksma08@gmail.com">
+                                    simeondijksma08@gmail.com
+                                </a>
+                                <button type="button" class="copy-email-btn" data-email="simeondijksma08@gmail.com"
+                                    aria-label="Copy email address">
+                                    <i class="ri-file-copy-line"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <span>Location</span>
+
+                            <p>Netherlands</p>
+                        </div>
+
+                        <div class="contact-item">
+                            <span>Availability</span>
+
+                            <p>Monday - Friday</p>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
 
         </section>
