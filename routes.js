@@ -8,8 +8,21 @@ const { renderProjectPage } = require('./templates');
 
 const router = express.Router();
 
-const resend =
-    new Resend(process.env.RESEND_API_KEY);
+// Lazily constructed — the Resend SDK throws immediately if the API key is
+// missing, and doing that at module load time would crash the *entire*
+// serverless function (every route, not just /send-email) on any deploy
+// where RESEND_API_KEY isn't set. Building it on first use means a missing
+// key only breaks the one route that actually needs it.
+let resend = null;
+function getResend() {
+    if (!resend) {
+        if (!process.env.RESEND_API_KEY) {
+            throw new Error('RESEND_API_KEY is not configured');
+        }
+        resend = new Resend(process.env.RESEND_API_KEY);
+    }
+    return resend;
+}
 
 const PROJECTS_PATH = path.join(__dirname, 'public', 'data', 'projects.json');
 const SESSION_MAX_AGE_MS = 12 * 60 * 60 * 1000; // 12 hours
@@ -455,7 +468,7 @@ router.post("/send-email", contactLimiter, async (req, res) => {
         }
 
         const data =
-            await resend.emails.send({
+            await getResend().emails.send({
 
                 from:
                     'Portfolio Contact <noreply@lunix.is-a.dev>',
