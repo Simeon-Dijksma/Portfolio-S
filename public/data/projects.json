@@ -31,41 +31,6 @@
         "img": "/images/fridge.webp"
     },
     {
-        "title": "tool",
-        "name": "Raspberry Pi Wi-Fi to Ethernet Router",
-        "desc": "Configured a Raspberry Pi 3B as a Wi-Fi-to-Ethernet router using NetworkManager, dnsmasq, and nftables.",
-        "link": "/pi3b-router",
-        "color": "#6e6e6e",
-        "isPublic": false,
-        "tech": [
-            "Linux",
-            "Bash",
-            "Raspberry Pi",
-            "NetworkManager",
-            "dnsmasq",
-            "nftables",
-            "Tailscale"
-        ],
-        "type": "Networking Tool",
-        "img": "/images/1783579594030-pi3b.webp",
-        "page": {
-            "tag": "Private/Non-commercial Project",
-            "heroDesc": "",
-            "aboutTitle": "",
-            "aboutParagraphs": [
-                "This project turns a Raspberry Pi 3B into a functional router that bridges a Wi-Fi internet connection to a wired Ethernet network. Devices plugged into the Pi, directly or through a switch, receive DHCP-assigned IPs and route their traffic out through the Pi's Wi-Fi interface, with no dependency on the host network's own router.",
-                "The stack behind it: Raspberry Pi OS Lite (32-bit) as a minimal base with no desktop overhead, NetworkManager (nmcli) for interface configuration since it replaces the legacy dhcpcd approach used in older Pi OS releases, dnsmasq as the DHCP server for Ethernet-side clients, nftables for NAT and firewalling, sysctl for kernel-level IP forwarding, and Tailscale, which was already running on the Pi and had to be accounted for since it also manages its own nftables rules.",
-                "The network itself uses the Pi's Ethernet interface as a static gateway at 10.10.10.1/24, with dnsmasq handing out addresses in the 10.10.10.100 to 10.10.10.200 range and pointing clients at 1.1.1.1 and 8.8.8.8 for DNS. Traffic from eth0 is masqueraded out through wlan0.",
-                "Most of the actual troubleshooting came from working against a current Raspberry Pi OS install rather than older guides. IP forwarding wasn't where expected, since /etc/sysctl.conf was empty and current Pi OS instead expects drop-in files under /etc/sysctl.d/; this was fixed by adding net.ipv4.ip_forward=1 in a new 99-ipforward.conf and applying it with sysctl --system. There was no dhcpcd.service to restart, since Bookworm replaced dhcpcd with NetworkManager entirely, so all interface configuration went through nmcli connection modify instead. The static IP on eth0 was set the same way, through NetworkManager, and verified with ip addr.",
-                "dnsmasq initially failed to start with an \"unknown interface eth0\" error, because it was starting before the Ethernet interface was available and was bound too strictly; switching its configuration from bind-interfaces to bind-dynamic let it wait for the interface instead of failing outright. On the client side, a laptop didn't reconnect automatically after a cable was unplugged and replugged, since NetworkManager wasn't re-activating the profile on its own; this was fixed manually with nmcli connection up, and permanently by setting connection.autoconnect yes. That same laptop also didn't have dhclient available, which is expected on modern NetworkManager-based distros that don't ship the ISC DHCP client by default, so nmcli connection down and up were used instead.",
-                "Tailscale also logged warnings that its NAT table was managed separately through iptables-nft, which turned out to be harmless. The custom masquerade rule for wlan0 was confirmed still active alongside it.",
-                "Everything was verified with ip addr and ip route for interfaces and routing, /proc/sys/net/ipv4/ip_forward for forwarding status, systemctl status dnsmasq and nft list ruleset for the DHCP and NAT setup, and /var/lib/misc/dnsmasq.leases for issued leases. In the end, the laptop received an IP from the Pi, used it as its default gateway, and kept full internet access with its own Wi-Fi turned off, confirming the Pi was correctly routing all traffic."
-            ],
-            "showcaseImg": "/images/1783579594030-pi3b.webp",
-            "showcaseCaption": ""
-        }
-    },
-    {
         "title": "Tool Website",
         "name": "Moduloro",
         "desc": "a simple website to host tools on, it loads js from '/tools' and loads them in the sidebar. when clicked render(container) is ran and your page will load.",
