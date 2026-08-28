@@ -716,6 +716,10 @@ router.get('/api/github/contributions', async (req, res) => {
 
         res.json({
             totalContributions,
+            accounts: accounts.map((account, index) => ({
+                username: account.username,
+                totalContributions: calendars[index].totalContributions
+            })),
             days
         });
 
