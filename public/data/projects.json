@@ -31,33 +31,6 @@
         "img": "/images/fridge.webp"
     },
     {
-        "title": "Tool",
-        "name": "NetScan",
-        "desc": "a small c program that scans your network for devices and open ports. it also displays hostname(if found) vendor and more.",
-        "link": "/netscan",
-        "color": "#5a5a5a",
-        "isPublic": false,
-        "tech": [
-            "C"
-        ],
-        "srcLink": "https://github.com/LenaDijksma/NetScan",
-        "type": "Networking Tool",
-        "img": "/images/netscan.webp",
-        "page": {
-            "tag": "Private / Non-Commercial Project",
-            "heroDesc": "",
-            "aboutTitle": "",
-            "aboutParagraphs": [
-                "NetScan is a command-line network scanner built from scratch in C. Given a subnet, or run with no arguments to auto-detect the local one, it ping-sweeps the range to find live hosts and tries to put a name to each one through DNS, mDNS, NetBIOS, and SSDP/UPnP lookups, falling back to a MAC vendor lookup when nothing else resolves. It can also deep-scan a single host directly with the --host flag.",
-                "Port scanning is done with a multi-threaded TCP connect-scan, with lightweight banner grabbing to help identify what's actually running on each open port. Scan range and connect timeout are both configurable from the command line, and results can be exported to JSON or CSV for use elsewhere.",
-                "A diff mode compares the current scan against the last one saved, flagging any devices that are new or have gone missing since. Output is columnar and color-coded in the terminal by default, with flags to hide the IP column or disable color entirely for cleaner piping into other tools. If optional dependencies like avahi, samba, or curl aren't installed, it detects that and prints what's missing along with the install command, rather than just failing name resolution silently.",
-                "I built it to get hands-on with raw sockets, threading, and Linux networking internals in C. There's still plenty I'd like to add, but it's a solid, working tool as it stands."
-            ],
-            "showcaseImg": "/images/netscan.webp",
-            "showcaseCaption": "Running **NetScan** on 192.168.178.0/24"
-        }
-    },
-    {
         "title": "tool",
         "name": "Localhost Port Scanner (portscan)",
         "desc": "A C command-line tool that scans a given port range on localhost and identifies which process is listening on each port.",
