@@ -134,7 +134,7 @@ if (typedText && typingTitle) {
         const currentText =
             texts[textIndex];
 
-        const cursor = '<span class="cursor">▋</span>';
+        const cursor = '<span class="cursor">|</span>';
 
         if (isDeleting) {
 
@@ -240,37 +240,41 @@ function createProjectCard(project, index) {
             : "View Project Page";
 
     const srcCodeLink = (!project.isPublic && project.srcLink)
-        ? `<a href="${project.srcLink}" target="_blank">Open source code<i class="ri-arrow-right-up-line" style="margin-left: 5px"></i></a>`
+        ? `<a href="${project.srcLink}" target="_blank" rel="noopener noreferrer">Open source code</a>`
         : "";
 
+    const idx = String(index + 1).padStart(2, "0");
+
     return `
-        <div
-            class="project-card"
-            style="--card-accent: ${project.color}"
+        <article
+            class="log-row"
             data-aos="fade-up"
-            data-aos-delay="${index * 100}"
+            data-aos-delay="${Math.min(index, 6) * 70}"
         >
-            <div class="project-top">
-                <span class="project-tag" style="color: ${project.color}">
-                    ${project.title}
-                </span>
-                <i class="ri-arrow-right-up-line" style="color: ${project.color}"></i>
+            <div class="log-row-idx">${idx}</div>
+
+            <div class="log-row-main">
+                <div class="log-row-top">
+                    <h3>${project.name}</h3>
+                    <span class="log-row-tag">${project.title}</span>
+                </div>
+
+                <p>${project.desc}</p>
+
+                ${techTags ? `<div class="tech-tags">${techTags}</div>` : ""}
+
+                <div class="log-row-links">
+                    ${srcCodeLink}
+                    <a href="${project.link}" ${project.isPublic ? 'target="_blank"' : ""} rel="noopener noreferrer">
+                        ${linkLabel}
+                    </a>
+                </div>
             </div>
 
-            <h3>${project.name}</h3>
-            <p>${project.desc}</p>
-            <img src="${project.img}" alt="${escapeAttr(project.name)} — ${escapeAttr(project.desc)}" class="cover-img" loading="lazy">
-
-            <div class="card-divider"></div>
-
-            ${techTags ? `<div class="tech-tags">${techTags}</div>` : ""}
-
-            ${srcCodeLink}
-
-            <a href="${project.link}" ${project.isPublic ? 'target="_blank"' : ""} rel="noopener noreferrer">
-                ${linkLabel}<i class="ri-arrow-right-up-line" style="margin-left: 5px"></i>
-            </a>
-        </div>
+            <div class="log-row-thumb">
+                <img src="${project.img}" alt="${escapeAttr(project.name)} — ${escapeAttr(project.desc)}" loading="lazy">
+            </div>
+        </article>
     `;
 }
 
@@ -328,6 +332,12 @@ fetch("/data/projects.json")
             );
         }
 
+        // COUNTS
+        const countPublicEl = document.getElementById("countPublic");
+        const countPrivateEl = document.getElementById("countPrivate");
+        if (countPublicEl) countPublicEl.textContent = publicProjectsGrid ? publicProjectsGrid.children.length : 0;
+        if (countPrivateEl) countPrivateEl.textContent = privateProjectsGrid ? privateProjectsGrid.children.length : 0;
+
         // REFRESH AOS
         AOS.refresh();
     })
@@ -339,6 +349,34 @@ fetch("/data/projects.json")
             error
         );
     });
+
+// =========================
+// PROJECT TABS (public / private)
+// =========================
+
+const projTabs = document.querySelectorAll(".proj-tab");
+const projTabDesc = document.getElementById("projTabDesc");
+
+const tabDescriptions = {
+    "public-projects": "Live sites — shipped for real clients, out in the world.",
+    "private-projects": "Personal tools and experiments, built for the problem itself."
+};
+
+projTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+        projTabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+
+        const target = tab.dataset.target;
+
+        if (publicProjectsGrid) publicProjectsGrid.classList.toggle("grid-hidden", target !== "public-projects");
+        if (privateProjectsGrid) privateProjectsGrid.classList.toggle("grid-hidden", target !== "private-projects");
+
+        if (projTabDesc) projTabDesc.textContent = tabDescriptions[target] || "";
+
+        AOS.refresh();
+    });
+});
 
 // =========================
 // FOOTER

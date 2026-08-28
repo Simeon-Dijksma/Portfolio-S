@@ -121,7 +121,7 @@ function renderProjectPage(project, slug) {
         </div>
 
         <nav class="nav">
-            <a href="/#projects">Back to Portfolio</a>
+            <a href="/#projects" class="nav-vertical-link">Back to Portfolio</a>
         </nav>
 
         <div class="theme-selector">
