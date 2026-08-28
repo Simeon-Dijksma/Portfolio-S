@@ -192,7 +192,7 @@ async function commitProjectsToGitHub(projects) {
 // last deploy and can't reflect a save made since then. Returns null if
 // GitHub isn't configured or the read fails, so callers can fall back to disk.
 async function getProjectsFromGitHub() {
-    const token = process.env.GITHUB_TOKEN;
+    const token = process.env.GITHUB_ADMIN_REPO_TOKEN;
     const repo = process.env.GITHUB_REPO;
     if (!token || !repo) return null;
 
