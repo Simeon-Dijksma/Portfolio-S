@@ -50,12 +50,11 @@
         "desc": "A custom css framework with css and js. techy style but with escape hatches for more fluid styles",
         "link": "/ldcss",
         "color": "#4d4d4d",
-        "public": false,
+        "isPublic": false,
         "tech": [
             "CSS",
             "JS"
         ],
-        "srcLink": "https://github.com/LenaDijksma/ldcss",
         "type": "css framework",
         "img": "/images/1784530855327-screenshot-2026-07-20-at-09-00-45-ldcss-lena-dijksma-css.png",
         "page": {
