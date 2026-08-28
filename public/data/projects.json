@@ -15,6 +15,20 @@
         "img": "/images/Nerinezorg.webp"
     },
     {
+        "title": "Website",
+        "name": "BizEase",
+        "desc": "BizEase supports entrepreneurs who want to grow but don't want to get bogged down in administration. No standard package, but help tailored to how you work.",
+        "link": "https://www.bizease.nl/",
+        "color": "#9c1414",
+        "isPublic": true,
+        "tech": [
+            "HTML",
+            "CSS"
+        ],
+        "type": "website",
+        "img": "/images/1787331760096-screenshot-2026-08-21-at-19-02-26-bizease-solutions.png"
+    },
+    {
         "title": "Collection Platform",
         "name": "Fridge Emblem Collection",
         "desc": "Website showcasing the world's biggest fridge emblem collection with a modern and organized gallery layout.",
@@ -122,20 +136,6 @@
             "showcaseImg": "/images/1785856943744-ldmp.png",
             "showcaseCaption": ""
         }
-    },
-    {
-        "title": "Website",
-        "name": "BizEase",
-        "desc": "BizEase supports entrepreneurs who want to grow but don't want to get bogged down in administration. No standard package, but help tailored to how you work.",
-        "link": "https://www.bizease.nl/",
-        "color": "#9c1414",
-        "isPublic": true,
-        "tech": [
-            "HTML",
-            "CSS"
-        ],
-        "type": "website",
-        "img": "/images/1787331760096-screenshot-2026-08-21-at-19-02-26-bizease-solutions.png"
     },
     {
         "title": "server tool",
