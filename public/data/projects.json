@@ -32,38 +32,6 @@
     },
     {
         "title": "tool",
-        "name": "Localhost Port Scanner (portscan)",
-        "desc": "A C command-line tool that scans a given port range on localhost and identifies which process is listening on each port.",
-        "link": "/portscan",
-        "color": "#8f1c1c",
-        "isPublic": false,
-        "tech": [
-            "C",
-            "Linux",
-            "/proc filesystem"
-        ],
-        "srcLink": "https://github.com/LenaDijksma/portscan",
-        "type": "Network Tool",
-        "img": "/images/1783600742210-portscan.webp",
-        "page": {
-            "tag": "Private/Non-commercial Project",
-            "heroDesc": "",
-            "aboutTitle": "",
-            "aboutParagraphs": [
-                "This project is a small, dependency-free CLI tool for a problem every developer runs into: figuring out what's actually bound to a given port on your own machine, without reaching for netstat or lsof. It's written in C and reads directly from the /proc filesystem, needing no root privileges and no external libraries.",
-                "The core approach works in three stages. First, it parses /proc/net/tcp and /proc/net/tcp6, the kernel-exposed tables of every TCP socket on the system, filtering down to sockets in the LISTEN state and recording their port number and socket inode. Second, it builds a full map from socket inode to owning PID by walking every process's /proc/<pid>/fd/ directory, since each open file descriptor is a symlink, and a socket descriptor's symlink target looks like socket:[12345], where 12345 is the inode.",
-                "Matching that against the listening sockets found in the first stage reveals which process owns which port. Third, for each resolved PID, it reads /proc/<pid>/comm and /proc/<pid>/cmdline to get a human-readable process name and full command line.",
-                "A notable bug during development was in the /proc/net/tcp parsing: the kernel's own header line lists 12 column names, but the actual data rows have fewer whitespace-separated tokens, since fields like tx_queue:rx_queue are colon-joined into a single token. This meant the inode field was being read one column too far to the right until the field-skip count was corrected.",
-                "The tool also supports a watch mode (-w), which takes an initial snapshot, then polls on an interval and diffs each new scan against the last one, printing only what changed: a port newly opened, a port that closed, or a port whose owning process changed, such as after a dev server restart. Building this exposed two further bugs: the result arrays were large enough per-entry (due to fixed-size name and command-line buffers)",
-                "that stack-allocating them at their maximum size overflowed the default stack and segfaulted, which was fixed by moving them to the heap; and stdout's default full-buffering meant watch mode's output appeared to vanish when the process was killed before its buffer flushed, fixed by switching stdout to line-buffered mode.",
-                "The finished tool resolves ports to real process names and command lines correctly both as an unprivileged user and under sudo, with root-owned system services like systemd-resolved only resolving when run with elevated privileges, exactly as expected given standard Linux file permissions."
-            ],
-            "showcaseImg": "/images/1783600742210-portscan.webp",
-            "showcaseCaption": ""
-        }
-    },
-    {
-        "title": "tool",
         "name": "Raspberry Pi Wi-Fi to Ethernet Router",
         "desc": "Configured a Raspberry Pi 3B as a Wi-Fi-to-Ethernet router using NetworkManager, dnsmasq, and nftables.",
         "link": "/pi3b-router",
