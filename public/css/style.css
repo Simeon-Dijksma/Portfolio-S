@@ -251,6 +251,17 @@ a {
 }
 
 /* =========================
+   NAV DIVIDER
+========================= */
+
+.nav-divider {
+    height: 3px;
+    width: 50px;
+    background: var(--text-light);
+    opacity: 50%;
+}
+
+/* =========================
    THEME TOGGLE
 ========================= */
 
