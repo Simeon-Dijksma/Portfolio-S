@@ -31,38 +31,6 @@
         "img": "/images/fridge.webp"
     },
     {
-        "title": "Tool Website",
-        "name": "Moduloro",
-        "desc": "a simple website to host tools on, it loads js from '/tools' and loads them in the sidebar. when clicked render(container) is ran and your page will load.",
-        "link": "/moduloro",
-        "color": "#d1291b",
-        "isPublic": false,
-        "tech": [
-            "HTML",
-            "CSS",
-            "JS"
-        ],
-        "srcLink": "https://github.com/LenaDijksma/Moduloro",
-        "type": "website",
-        "img": "/images/1784265645608-screenshot-2026-07-17-at-07-20-36-moduloro.png",
-        "page": {
-            "tag": "Private/Non-commercial Projects",
-            "heroDesc": "",
-            "aboutTitle": "",
-            "aboutParagraphs": [
-                "Moduloro started as a simple question: what's the minimum architecture needed to keep adding small tools to a site without the overhead growing with it?",
-                "The answer was a plugin-style system built on plain ES modules — no framework, no bundler, no build step.",
-                "Each tool is a single .js file that exports one function, render(container). An Express server scans the tools/ directory on startup, reads an optional name comment from the top of each file, and generates the sidebar manifest automatically — so adding a new feature is just \"create a file, restart the server.\" No routing config, no registration step, no rebuild.",
-                "The frontend loads tools on demand with dynamic import(), passing each one a fresh DOM container to own outright. That constraint — a tool gets a <div> and nothing else — kept every module self-contained and forced consistent patterns for state and re-rendering (each tool keeps its own state in closure and calls a local draw() function to re-render, rather than reaching for a framework's diffing).",
-                "The Kanban board was the most involved piece: drag-and-drop columns, inline search that had to survive re-renders without losing input focus, and a detail modal (title, due date, description, timestamp) built without any UI library — just DOM events, contenteditable/form inputs, and manual focus management.",
-                "Styling went through a deliberate refactor pass too: rather than scattering hex values and pixel numbers through the CSS, I pulled everything — color, spacing, radius, shadows, transitions — into CSS custom properties in :root, so the whole dark theme can be retuned from one place without touching component rules.",
-                "Everything persists client-side via localStorage; there's no backend database, keeping the whole thing a static-file-adjacent app with just enough server logic to make development friction-free."
-            ],
-            "showcaseImg": "/images/1784265645608-screenshot-2026-07-17-at-07-20-36-moduloro.png",
-            "showcaseCaption": "Moduloro clock module"
-        }
-    },
-    {
         "title": "css framework",
         "name": "ldcss",
         "desc": "A custom css framework with css and js. techy style but with escape hatches for more fluid styles",
