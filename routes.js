@@ -262,6 +262,12 @@ router.get('/admin43AE39', (req, res) => {
     );
 });
 
+router.get('/about', (req, res) => {
+    res.sendFile(
+        path.join(__dirname, 'public', 'about.html')
+    );
+});
+
 // =========================
 // ADMIN API
 // =========================
