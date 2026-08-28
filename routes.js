@@ -134,12 +134,12 @@ function clearAttempts(ip) {
 // =========================
 
 async function commitFileToGitHub(repoFilePath, base64Content, message) {
-    const token = process.env.GITHUB_TOKEN;
+    const token = process.env.GITHUB_ADMIN_REPO_TOKEN;
     const repo = process.env.GITHUB_REPO; // "owner/repo"
     const branch = process.env.GITHUB_BRANCH || 'main';
 
     if (!token || !repo) {
-        throw new Error('GitHub integration is not configured (missing GITHUB_TOKEN or GITHUB_REPO)');
+        throw new Error('GitHub integration is not configured (missing GITHUB_ADMIN_REPO_TOKEN or GITHUB_REPO)');
     }
 
     const apiUrl = `https://api.github.com/repos/${repo}/contents/${repoFilePath}`;
