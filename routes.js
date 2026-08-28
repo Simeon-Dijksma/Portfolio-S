@@ -554,48 +554,36 @@ router.get('/:slug', async (req, res, next) => {
 // =========================
 // GITHUB CONTRIBUTIONS
 // =========================
-// =========================
-// GITHUB CONTRIBUTIONS
-// =========================
 
 router.get('/api/github/contributions', async (req, res) => {
     res.set('Cache-Control', 'no-store');
 
     try {
-        // Supports one or two GitHub accounts.
+        // Configure one or two GitHub accounts:
         //
-        // Required:
-        //   GITHUB_USERNAME=private-account
+        // GITHUB_USERNAME=private-account
+        // GITHUB_TOKEN=token-for-private-account
         //
-        // Optional:
-        //   GITHUB_COMPANY_USERNAME=company-account
+        // GITHUB_COMPANY_USERNAME=company-account
+        // GITHUB_COMPANY_TOKEN=token-for-company-account
         //
-        // If GITHUB_COMPANY_USERNAME isn't set, only the first account
-        // will be used.
+        // The company account is optional. If it isn't configured,
+        // only the private account will be used.
 
-        const usernames = [
-            process.env.GITHUB_USERNAME,
-            process.env.GITHUB_COMPANY_USERNAME
-        ].filter(Boolean);
+        const accounts = [
+            {
+                username: process.env.GITHUB_USERNAME,
+                token: process.env.GITHUB_TOKEN
+            },
+            {
+                username: process.env.GITHUB_COMPANY_USERNAME,
+                token: process.env.GITHUB_COMPANY_TOKEN
+            }
+        ].filter(account => account.username && account.token);
 
-        if (usernames.length === 0) {
+        if (accounts.length === 0) {
             return res.status(500).json({
-                error: "GitHub username not configured"
-            });
-        }
-
-        // GitHub's GraphQL API only folds private/internal repo activity into
-        // contributionsCollection when the token carries the "read:user" scope.
-        //
-        // Use a dedicated contribution token rather than widening the token
-        // used by the admin panel.
-        const contribToken =
-            process.env.GITHUB_CONTRIB_TOKEN ||
-            process.env.GITHUB_TOKEN;
-
-        if (!contribToken) {
-            return res.status(500).json({
-                error: "GitHub token not configured"
+                error: "No GitHub accounts configured"
             });
         }
 
@@ -617,44 +605,51 @@ router.get('/api/github/contributions', async (req, res) => {
             }
         `;
 
-        const headers = {
-            "Authorization": `Bearer ${contribToken}`,
-            "Content-Type": "application/json"
-        };
-
-        // Fetch the contribution calendar for every configured account.
+        // Fetch both accounts independently using their own tokens.
         const calendars = await Promise.all(
-            usernames.map(async (username) => {
+            accounts.map(async (account) => {
                 const response = await fetch(
                     "https://api.github.com/graphql",
                     {
                         method: "POST",
-                        headers,
+                        headers: {
+                            "Authorization": `Bearer ${account.token}`,
+                            "Content-Type": "application/json",
+                            "User-Agent": "lunix-portfolio"
+                        },
                         body: JSON.stringify({
                             query,
                             variables: {
-                                userName: username
+                                userName: account.username
                             }
                         })
                     }
                 );
 
+                if (!response.ok) {
+                    const errorBody = await response.text();
+
+                    throw new Error(
+                        `GitHub HTTP ${response.status} for ${account.username}: ${errorBody}`
+                    );
+                }
+
                 const result = await response.json();
 
                 if (result.errors) {
                     console.error(
-                        `GitHub API error for ${username}:`,
+                        `GitHub GraphQL error for ${account.username}:`,
                         result.errors
                     );
 
                     throw new Error(
-                        `GitHub API error for ${username}`
+                        `GitHub API error for ${account.username}`
                     );
                 }
 
                 if (!result.data?.user) {
                     throw new Error(
-                        `GitHub user not found: ${username}`
+                        `GitHub user not found: ${account.username}`
                     );
                 }
 
@@ -664,28 +659,31 @@ router.get('/api/github/contributions', async (req, res) => {
             })
         );
 
-        // Merge contribution counts by date.
+        // =========================
+        // MERGE CONTRIBUTIONS
+        // =========================
+
         const mergedDays = new Map();
 
         for (const calendar of calendars) {
             for (const week of calendar.weeks) {
                 for (const day of week.contributionDays) {
-                    const existing = mergedDays.get(day.date) || 0;
+                    const currentCount =
+                        mergedDays.get(day.date) || 0;
 
                     mergedDays.set(
                         day.date,
-                        existing + day.contributionCount
+                        currentCount + day.contributionCount
                     );
                 }
             }
         }
 
-        // Convert the merged map back into the format expected by
-        // the Git contribution calendar frontend.
+        // Convert the merged map back into an array.
         const days = Array.from(mergedDays.entries())
-            .sort(([dateA], [dateB]) =>
-                new Date(dateA) - new Date(dateB)
-            )
+            .sort(([dateA], [dateB]) => {
+                return new Date(dateA) - new Date(dateB);
+            })
             .map(([date, count]) => {
                 let level = 0;
 
@@ -708,10 +706,11 @@ router.get('/api/github/contributions', async (req, res) => {
                 };
             });
 
-        // Sum the totals from both accounts.
+        // Add the totals from all configured accounts.
         const totalContributions = calendars.reduce(
-            (total, calendar) =>
-                total + calendar.totalContributions,
+            (total, calendar) => {
+                return total + calendar.totalContributions;
+            },
             0
         );
 
